@@ -1,0 +1,1 @@
+xst -intstyle ise -ifn "/home/kommi/Downloads/Singlecycletest/Singlecycletest/CPU.xst" -ofn "/home/kommi/Downloads/Singlecycletest/Singlecycletest/CPU.syr" 

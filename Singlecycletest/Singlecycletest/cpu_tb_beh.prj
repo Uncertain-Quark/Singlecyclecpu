@@ -1,0 +1,8 @@
+verilog work "rf_file.v"
+verilog work "decoder.v"
+verilog work "ALU.v"
+verilog work "imem(1).v"
+verilog work "dmem(2).v"
+verilog work "CPU.v"
+verilog work "cpu_tb.v"
+verilog work "/opt/tools/xilinx/ise/14.7/ISE_DS/ISE//verilog/src/glbl.v"

@@ -1,0 +1,743 @@
+Release 14.7 - xst P.20131013 (lin64)
+Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+--> 
+Parameter TMPDIR set to xst/projnav.tmp
+
+
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.07 secs
+ 
+--> 
+Parameter xsthdpdir set to xst
+
+
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.07 secs
+ 
+--> 
+Reading design: CPU.prj
+
+TABLE OF CONTENTS
+  1) Synthesis Options Summary
+  2) HDL Compilation
+  3) Design Hierarchy Analysis
+  4) HDL Analysis
+  5) HDL Synthesis
+     5.1) HDL Synthesis Report
+  6) Advanced HDL Synthesis
+     6.1) Advanced HDL Synthesis Report
+  7) Low Level Synthesis
+  8) Partition Report
+  9) Final Report
+	9.1) Device utilization summary
+	9.2) Partition Resource Summary
+	9.3) TIMING REPORT
+
+
+=========================================================================
+*                      Synthesis Options Summary                        *
+=========================================================================
+---- Source Parameters
+Input File Name                    : "CPU.prj"
+Input Format                       : mixed
+Ignore Synthesis Constraint File   : NO
+
+---- Target Parameters
+Output File Name                   : "CPU"
+Output Format                      : NGC
+Target Device                      : xc3s500e-5-fg320
+
+---- Source Options
+Top Module Name                    : CPU
+Automatic FSM Extraction           : YES
+FSM Encoding Algorithm             : Auto
+Safe Implementation                : No
+FSM Style                          : LUT
+RAM Extraction                     : Yes
+RAM Style                          : Auto
+ROM Extraction                     : Yes
+Mux Style                          : Auto
+Decoder Extraction                 : YES
+Priority Encoder Extraction        : Yes
+Shift Register Extraction          : YES
+Logical Shifter Extraction         : YES
+XOR Collapsing                     : YES
+ROM Style                          : Auto
+Mux Extraction                     : Yes
+Resource Sharing                   : YES
+Asynchronous To Synchronous        : NO
+Multiplier Style                   : Auto
+Automatic Register Balancing       : No
+
+---- Target Options
+Add IO Buffers                     : YES
+Global Maximum Fanout              : 100000
+Add Generic Clock Buffer(BUFG)     : 24
+Register Duplication               : YES
+Slice Packing                      : YES
+Optimize Instantiated Primitives   : NO
+Use Clock Enable                   : Yes
+Use Synchronous Set                : Yes
+Use Synchronous Reset              : Yes
+Pack IO Registers into IOBs        : Auto
+Equivalent register Removal        : YES
+
+---- General Options
+Optimization Goal                  : Speed
+Optimization Effort                : 1
+Keep Hierarchy                     : No
+Netlist Hierarchy                  : As_Optimized
+RTL Output                         : Yes
+Global Optimization                : AllClockNets
+Read Cores                         : YES
+Write Timing Constraints           : NO
+Cross Clock Analysis               : NO
+Hierarchy Separator                : /
+Bus Delimiter                      : <>
+Case Specifier                     : Maintain
+Slice Utilization Ratio            : 100
+BRAM Utilization Ratio             : 100
+Verilog 2001                       : YES
+Auto BRAM Packing                  : NO
+Slice Utilization Ratio Delta      : 5
+
+=========================================================================
+
+
+=========================================================================
+*                          HDL Compilation                              *
+=========================================================================
+Compiling verilog file "rf_file.v" in library work
+Compiling verilog file "decoder.v" in library work
+Module <rf_file> compiled
+Compiling verilog file "ALU.v" in library work
+Module <decoder> compiled
+Compiling verilog file "CPU.v" in library work
+Module <ALU> compiled
+Module <CPU> compiled
+No errors in compilation
+Analysis of file <"CPU.prj"> succeeded.
+ 
+
+=========================================================================
+*                     Design Hierarchy Analysis                         *
+=========================================================================
+Analyzing hierarchy for module <CPU> in library <work>.
+
+Analyzing hierarchy for module <decoder> in library <work>.
+
+Analyzing hierarchy for module <ALU> in library <work>.
+
+Analyzing hierarchy for module <rf_file> in library <work>.
+
+
+=========================================================================
+*                            HDL Analysis                               *
+=========================================================================
+Analyzing top module <CPU>.
+Module <CPU> is correct for synthesis.
+ 
+Analyzing module <decoder> in library <work>.
+Module <decoder> is correct for synthesis.
+ 
+Analyzing module <ALU> in library <work>.
+Module <ALU> is correct for synthesis.
+ 
+Analyzing module <rf_file> in library <work>.
+Module <rf_file> is correct for synthesis.
+ 
+
+=========================================================================
+*                           HDL Synthesis                               *
+=========================================================================
+
+Performing bidirectional port resolution...
+
+Synthesizing Unit <decoder>.
+    Related source file is "decoder.v".
+Unit <decoder> synthesized.
+
+
+Synthesizing Unit <ALU>.
+    Related source file is "ALU.v".
+    Found 32-bit addsub for signal <out$addsub0000>.
+    Found 32-bit comparator equal for signal <out$cmp_eq0002> created at line 27.
+    Found 32-bit comparator greatequal for signal <out$cmp_ge0000> created at line 30.
+    Found 32-bit comparator greatequal for signal <out$cmp_ge0001> created at line 32.
+    Found 32-bit comparator less for signal <out$cmp_lt0000> created at line 42.
+    Found 32-bit comparator less for signal <out$cmp_lt0001> created at line 43.
+    Found 32-bit comparator not equal for signal <out$cmp_ne0000> created at line 28.
+    Found 32-bit shifter logical left for signal <out$shift0003> created at line 47.
+    Found 32-bit shifter logical right for signal <out$shift0004> created at line 48.
+    Found 32-bit shifter arithmetic right for signal <out$shift0005> created at line 49.
+    Found 32-bit xor2 for signal <out$xor0000> created at line 44.
+    Summary:
+	inferred   1 Adder/Subtractor(s).
+	inferred   6 Comparator(s).
+	inferred   3 Combinational logic shifter(s).
+Unit <ALU> synthesized.
+
+
+Synthesizing Unit <rf_file>.
+    Related source file is "rf_file.v".
+    Found 32x32-bit dual-port RAM <Mram_rfmem> for signal <rfmem>.
+    Found 32x32-bit dual-port RAM <Mram_rfmem_ren> for signal <rfmem>.
+    Summary:
+	inferred   2 RAM(s).
+Unit <rf_file> synthesized.
+
+
+Synthesizing Unit <CPU>.
+    Related source file is "CPU.v".
+WARNING:Xst:1306 - Output <x31> is never assigned.
+WARNING:Xst:646 - Signal <rv2_buff> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:737 - Found 4-bit latch for signal <we>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+INFO:Xst:2371 - HDL ADVISOR - Logic functions respectively driving the data and gate enable inputs of this latch share common terms. This situation will potentially lead to setup/hold violations and, as a result, to simulation problems. This situation may come from an incomplete case statement (all selector values are not covered). You should carefully review if it was in your intentions to describe such a latch.
+WARNING:Xst:737 - Found 32-bit latch for signal <rf_win>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+INFO:Xst:2371 - HDL ADVISOR - Logic functions respectively driving the data and gate enable inputs of this latch share common terms. This situation will potentially lead to setup/hold violations and, as a result, to simulation problems. This situation may come from an incomplete case statement (all selector values are not covered). You should carefully review if it was in your intentions to describe such a latch.
+    Found 32-bit register for signal <iaddr>.
+    Found 6-bit comparator greatequal for signal <alu_rv2$cmp_ge0000> created at line 32.
+    Found 6-bit comparator greatequal for signal <alu_rv2$cmp_ge0001> created at line 32.
+    Found 6-bit comparator lessequal for signal <alu_rv2$cmp_le0000> created at line 32.
+    Found 32-bit adder for signal <iaddr$addsub0000> created at line 92.
+    Found 32-bit adder for signal <rf_win$add0000> created at line 53.
+    Found 32-bit adder for signal <rf_win$add0001> created at line 54.
+    Summary:
+	inferred  32 D-type flip-flop(s).
+	inferred   3 Adder/Subtractor(s).
+	inferred   3 Comparator(s).
+Unit <CPU> synthesized.
+
+INFO:Xst:1767 - HDL ADVISOR - Resource sharing has identified that some arithmetic operations in this design can share the same physical resources for reduced device utilization. For improved clock frequency you may try to disable resource sharing.
+
+=========================================================================
+HDL Synthesis Report
+
+Macro Statistics
+# RAMs                                                 : 2
+ 32x32-bit dual-port RAM                               : 2
+# Adders/Subtractors                                   : 4
+ 32-bit adder                                          : 3
+ 32-bit addsub                                         : 1
+# Registers                                            : 1
+ 32-bit register                                       : 1
+# Latches                                              : 2
+ 32-bit latch                                          : 1
+ 4-bit latch                                           : 1
+# Comparators                                          : 9
+ 32-bit comparator equal                               : 1
+ 32-bit comparator greatequal                          : 2
+ 32-bit comparator less                                : 2
+ 32-bit comparator not equal                           : 1
+ 6-bit comparator greatequal                           : 2
+ 6-bit comparator lessequal                            : 1
+# Logic shifters                                       : 3
+ 32-bit shifter arithmetic right                       : 1
+ 32-bit shifter logical left                           : 1
+ 32-bit shifter logical right                          : 1
+# Xors                                                 : 1
+ 32-bit xor2                                           : 1
+
+=========================================================================
+
+=========================================================================
+*                       Advanced HDL Synthesis                          *
+=========================================================================
+
+
+Synthesizing (advanced) Unit <rf_file>.
+INFO:Xst:3218 - HDL ADVISOR - The RAM <Mram_rfmem> will be implemented on LUTs either because you have described an asynchronous read or because of currently unsupported block RAM features. If you have described an asynchronous read, making it synchronous would allow you to take advantage of available block RAM resources, for optimized device usage and improved timings. Please refer to your documentation for coding guidelines.
+    -----------------------------------------------------------------------
+    | ram_type           | Distributed                         |          |
+    -----------------------------------------------------------------------
+    | Port A                                                              |
+    |     aspect ratio   | 32-word x 32-bit                    |          |
+    |     clkA           | connected to signal <clk>           | rise     |
+    |     weA            | connected to signal <_and0000>      | high     |
+    |     addrA          | connected to signal <rd>            |          |
+    |     diA            | connected to signal <indata>        |          |
+    -----------------------------------------------------------------------
+    | Port B                                                              |
+    |     aspect ratio   | 32-word x 32-bit                    |          |
+    |     addrB          | connected to signal <rs1>           |          |
+    |     doB            | connected to signal <rv1>           |          |
+    -----------------------------------------------------------------------
+INFO:Xst:3218 - HDL ADVISOR - The RAM <Mram_rfmem_ren> will be implemented on LUTs either because you have described an asynchronous read or because of currently unsupported block RAM features. If you have described an asynchronous read, making it synchronous would allow you to take advantage of available block RAM resources, for optimized device usage and improved timings. Please refer to your documentation for coding guidelines.
+    -----------------------------------------------------------------------
+    | ram_type           | Distributed                         |          |
+    -----------------------------------------------------------------------
+    | Port A                                                              |
+    |     aspect ratio   | 32-word x 32-bit                    |          |
+    |     clkA           | connected to signal <clk>           | rise     |
+    |     weA            | connected to signal <_and0000>      | high     |
+    |     addrA          | connected to signal <rd>            |          |
+    |     diA            | connected to signal <indata>        |          |
+    -----------------------------------------------------------------------
+    | Port B                                                              |
+    |     aspect ratio   | 32-word x 32-bit                    |          |
+    |     addrB          | connected to signal <rs2>           |          |
+    |     doB            | connected to signal <rv2>           |          |
+    -----------------------------------------------------------------------
+Unit <rf_file> synthesized (advanced).
+
+=========================================================================
+Advanced HDL Synthesis Report
+
+Macro Statistics
+# RAMs                                                 : 2
+ 32x32-bit dual-port distributed RAM                   : 2
+# Adders/Subtractors                                   : 4
+ 32-bit adder                                          : 3
+ 32-bit addsub                                         : 1
+# Registers                                            : 32
+ Flip-Flops                                            : 32
+# Latches                                              : 2
+ 32-bit latch                                          : 1
+ 4-bit latch                                           : 1
+# Comparators                                          : 9
+ 32-bit comparator equal                               : 1
+ 32-bit comparator greatequal                          : 2
+ 32-bit comparator less                                : 2
+ 32-bit comparator not equal                           : 1
+ 6-bit comparator greatequal                           : 2
+ 6-bit comparator lessequal                            : 1
+# Logic shifters                                       : 3
+ 32-bit shifter arithmetic right                       : 1
+ 32-bit shifter logical left                           : 1
+ 32-bit shifter logical right                          : 1
+# Xors                                                 : 1
+ 32-bit xor2                                           : 1
+
+=========================================================================
+
+=========================================================================
+*                         Low Level Synthesis                           *
+=========================================================================
+WARNING:Xst:2170 - Unit ALU : the following signal(s) form a combinatorial loop: out_shift0002<31>.
+
+Optimizing unit <CPU> ...
+
+Optimizing unit <decoder> ...
+
+Optimizing unit <ALU> ...
+
+Mapping all equations...
+Building and optimizing final netlist ...
+Found area constraint ratio of 100 (+ 5) on block CPU, actual ratio is 18.
+
+Final Macro Processing ...
+
+=========================================================================
+Final Register Report
+
+Macro Statistics
+# Registers                                            : 32
+ Flip-Flops                                            : 32
+
+=========================================================================
+
+=========================================================================
+*                           Partition Report                            *
+=========================================================================
+
+Partition Implementation Status
+-------------------------------
+
+  No Partitions were found in this design.
+
+-------------------------------
+
+=========================================================================
+*                            Final Report                               *
+=========================================================================
+Final Results
+RTL Top Level Output File Name     : CPU.ngr
+Top Level Output File Name         : CPU
+Output Format                      : NGC
+Optimization Goal                  : Speed
+Keep Hierarchy                     : No
+
+Design Statistics
+# IOs                              : 230
+
+Cell Usage :
+# BELS                             : 1975
+#      GND                         : 1
+#      INV                         : 1
+#      LUT1                        : 31
+#      LUT2                        : 69
+#      LUT2_D                      : 2
+#      LUT2_L                      : 1
+#      LUT3                        : 427
+#      LUT3_D                      : 25
+#      LUT3_L                      : 28
+#      LUT4                        : 786
+#      LUT4_D                      : 29
+#      LUT4_L                      : 82
+#      MUXCY                       : 234
+#      MUXF5                       : 130
+#      VCC                         : 1
+#      XORCY                       : 128
+# FlipFlops/Latches                : 68
+#      FDRS                        : 32
+#      LD                          : 36
+# RAMS                             : 128
+#      RAM16X1D                    : 128
+# Clock Buffers                    : 2
+#      BUFG                        : 1
+#      BUFGP                       : 1
+# IO Buffers                       : 197
+#      IBUF                        : 65
+#      OBUF                        : 132
+=========================================================================
+
+Device utilization summary:
+---------------------------
+
+Selected Device : 3s500efg320-5 
+
+ Number of Slices:                      870  out of   4656    18%  
+ Number of Slice Flip Flops:             64  out of   9312     0%  
+ Number of 4 input LUTs:               1737  out of   9312    18%  
+    Number used as logic:              1481
+    Number used as RAMs:                256
+ Number of IOs:                         230
+ Number of bonded IOBs:                 198  out of    232    85%  
+    IOB Flip Flops:                       4
+ Number of GCLKs:                         2  out of     24     8%  
+
+---------------------------
+Partition Resource Summary:
+---------------------------
+
+  No Partitions were found in this design.
+
+---------------------------
+
+
+=========================================================================
+TIMING REPORT
+
+NOTE: THESE TIMING NUMBERS ARE ONLY A SYNTHESIS ESTIMATE.
+      FOR ACCURATE TIMING INFORMATION PLEASE REFER TO THE TRACE REPORT
+      GENERATED AFTER PLACE-and-ROUTE.
+
+Clock Information:
+------------------
+-----------------------------------+------------------------+-------+
+Clock Signal                       | Clock buffer(FF name)  | Load  |
+-----------------------------------+------------------------+-------+
+we_not0001(we_not0001:O)           | NONE(*)(we_0)          | 4     |
+clk                                | BUFGP                  | 160   |
+rf_win_not00011(rf_win_not0001:O)  | BUFG(*)(rf_win_0)      | 32    |
+-----------------------------------+------------------------+-------+
+(*) These 2 clock signal(s) are generated by combinatorial logic,
+and XST is not able to identify which are the primary clock signals.
+Please use the CLOCK_SIGNAL constraint to specify the clock signal(s) generated by combinatorial logic.
+INFO:Xst:2169 - HDL ADVISOR - Some clock signals were not automatically buffered by XST with BUFG/BUFR resources. Please use the buffer_type constraint in order to insert these buffers to the clock signals to help prevent skew problems.
+
+Asynchronous Control Signals Information:
+----------------------------------------
+No asynchronous control signals found in this design
+
+Timing Summary:
+---------------
+Speed Grade: -5
+
+   Minimum period: 17.197ns (Maximum Frequency: 58.148MHz)
+   Minimum input arrival time before clock: 29.549ns
+   Maximum output required time after clock: 15.898ns
+   Maximum combinational path delay: 28.151ns
+
+Timing Detail:
+--------------
+All values displayed in nanoseconds (ns)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'clk'
+  Clock period: 17.197ns (frequency: 58.148MHz)
+  Total number of paths / destination ports: 1343536 / 64
+-------------------------------------------------------------------------
+Delay:               17.197ns (Levels of Logic = 20)
+  Source:            rf1/Mram_rfmem_ren41 (RAM)
+  Destination:       iaddr_0 (FF)
+  Source Clock:      clk rising
+  Destination Clock: clk rising
+
+  Data Path: rf1/Mram_rfmem_ren41 to iaddr_0
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     RAM16X1D:WCLK->DPO    1   1.654   0.426  rf1/Mram_rfmem_ren41 (N85)
+     LUT3:I1->O            5   0.612   0.568  inst_LPM_MUX2011 (dwdata_20_OBUF)
+     LUT3:I2->O            5   0.612   0.690  alu_rv2<20>1 (alu_rv2<20>)
+     LUT4:I0->O            1   0.612   0.000  a1/out_or0000_wg_lut<1> (a1/out_or0000_wg_lut<1>)
+     MUXCY:S->O            1   0.404   0.000  a1/out_or0000_wg_cy<1> (a1/out_or0000_wg_cy<1>)
+     MUXCY:CI->O           1   0.052   0.000  a1/out_or0000_wg_cy<2> (a1/out_or0000_wg_cy<2>)
+     MUXCY:CI->O           1   0.052   0.000  a1/out_or0000_wg_cy<3> (a1/out_or0000_wg_cy<3>)
+     MUXCY:CI->O           1   0.052   0.000  a1/out_or0000_wg_cy<4> (a1/out_or0000_wg_cy<4>)
+     MUXCY:CI->O           1   0.052   0.000  a1/out_or0000_wg_cy<5> (a1/out_or0000_wg_cy<5>)
+     MUXCY:CI->O          30   0.399   1.224  a1/out_or0000_wg_cy<6> (a1/out_or0000)
+     LUT3_D:I0->O          8   0.612   0.673  a1/out_shift0002<31>1 (a1/out_shift0002<31>)
+     LUT3_D:I2->O         15   0.612   0.867  a1/out<0>21_1 (a1/out<0>21)
+     LUT4_L:I3->LO         1   0.612   0.103  a1/out<19>140_SW0 (N470)
+     LUT4:I3->O            3   0.612   0.454  a1/out<19>176 (daddr_19_OBUF)
+     LUT4:I3->O            1   0.612   0.000  iaddr_cmp_eq0000_wg_lut<3> (iaddr_cmp_eq0000_wg_lut<3>)
+     MUXCY:S->O            1   0.404   0.000  iaddr_cmp_eq0000_wg_cy<3> (iaddr_cmp_eq0000_wg_cy<3>)
+     MUXCY:CI->O           1   0.051   0.000  iaddr_cmp_eq0000_wg_cy<4> (iaddr_cmp_eq0000_wg_cy<4>)
+     MUXCY:CI->O           1   0.051   0.000  iaddr_cmp_eq0000_wg_cy<5> (iaddr_cmp_eq0000_wg_cy<5>)
+     MUXCY:CI->O           3   0.400   0.481  iaddr_cmp_eq0000_wg_cy<6> (iaddr_cmp_eq00001)
+     LUT4_D:I2->O         15   0.612   0.867  iaddr_mux0000<0>1 (N22)
+     LUT4:I3->O            1   0.612   0.357  iaddr_mux0000<22>_SW0 (N341)
+     FDRS:S                    0.795          iaddr_22
+    ----------------------------------------
+    Total                     17.197ns (10.485ns logic, 6.712ns route)
+                                       (61.0% logic, 39.0% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'we_not0001'
+  Total number of paths / destination ports: 13980242 / 4
+-------------------------------------------------------------------------
+Offset:              27.036ns (Levels of Logic = 26)
+  Source:            idata<0> (PAD)
+  Destination:       we_1 (LATCH)
+  Destination Clock: we_not0001 falling
+
+  Data Path: idata<0> to we_1
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IBUF:I->O            10   1.106   0.902  idata_0_IBUF (idata_0_IBUF)
+     LUT4:I0->O            1   0.612   0.000  d1/rd_cmp_eq001111 (d1/rd_cmp_eq00111)
+     MUXF5:I0->O          13   0.278   0.866  d1/rd_cmp_eq00111_f5 (d1/N21)
+     LUT3:I2->O            6   0.612   0.721  d1/rs1_cmp_eq00021 (d1/rs1_cmp_eq0002)
+     LUT3:I0->O            7   0.612   0.671  d1/rs1_and000211 (d1/N26)
+     LUT4:I1->O            2   0.612   0.532  d1/rs1_or000023 (d1/rs1_or000023)
+     LUT4:I0->O            9   0.612   0.849  d1/rs1_or000040 (d1/rs1_or0000)
+     LUT3:I0->O            1   0.612   0.360  d1/opcode<0>67 (d1/opcode<0>67)
+     LUT4:I3->O            1   0.612   0.387  d1/opcode<0>108_SW0 (N1016)
+     LUT4:I2->O           48   0.612   1.080  d1/opcode<0>108 (opcode<0>)
+     LUT4:I3->O            1   0.612   0.387  alu_rv2_or0000_SW1 (N375)
+     LUT4:I2->O          145   0.612   1.255  alu_rv2_or0000 (alu_rv2_or0000)
+     LUT3:I0->O            5   0.612   0.690  alu_rv2<20>1 (alu_rv2<20>)
+     LUT4:I0->O            1   0.612   0.000  a1/out_or0000_wg_lut<1> (a1/out_or0000_wg_lut<1>)
+     MUXCY:S->O            1   0.404   0.000  a1/out_or0000_wg_cy<1> (a1/out_or0000_wg_cy<1>)
+     MUXCY:CI->O           1   0.052   0.000  a1/out_or0000_wg_cy<2> (a1/out_or0000_wg_cy<2>)
+     MUXCY:CI->O           1   0.052   0.000  a1/out_or0000_wg_cy<3> (a1/out_or0000_wg_cy<3>)
+     MUXCY:CI->O           1   0.052   0.000  a1/out_or0000_wg_cy<4> (a1/out_or0000_wg_cy<4>)
+     MUXCY:CI->O           1   0.052   0.000  a1/out_or0000_wg_cy<5> (a1/out_or0000_wg_cy<5>)
+     MUXCY:CI->O          30   0.399   1.224  a1/out_or0000_wg_cy<6> (a1/out_or0000)
+     LUT3_D:I0->O          8   0.612   0.673  a1/out_shift0002<31>1 (a1/out_shift0002<31>)
+     LUT3_D:I2->O         15   0.612   0.894  a1/out<0>21_1 (a1/out<0>21)
+     LUT4:I2->O            2   0.612   0.383  a1/out<0>220 (a1/out<0>220)
+     LUT4:I3->O           19   0.612   1.074  a1/out<0>422 (daddr_0_OBUF)
+     LUT4:I0->O            2   0.612   0.410  we_mux0000<1>1 (N6)
+     LUT4:I2->O            1   0.612   0.000  we_mux0000<1>2 (we_mux0000<1>)
+     LD:D                      0.268          we_1
+    ----------------------------------------
+    Total                     27.036ns (13.677ns logic, 13.358ns route)
+                                       (50.6% logic, 49.4% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'clk'
+  Total number of paths / destination ports: 2171835705 / 1248
+-------------------------------------------------------------------------
+Offset:              29.450ns (Levels of Logic = 31)
+  Source:            idata<0> (PAD)
+  Destination:       iaddr_0 (FF)
+  Destination Clock: clk rising
+
+  Data Path: idata<0> to iaddr_0
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IBUF:I->O            10   1.106   0.902  idata_0_IBUF (idata_0_IBUF)
+     LUT4:I0->O            1   0.612   0.000  d1/rd_cmp_eq001111 (d1/rd_cmp_eq00111)
+     MUXF5:I0->O          13   0.278   0.866  d1/rd_cmp_eq00111_f5 (d1/N21)
+     LUT3:I2->O            6   0.612   0.721  d1/rs1_cmp_eq00021 (d1/rs1_cmp_eq0002)
+     LUT3:I0->O            7   0.612   0.671  d1/rs1_and000211 (d1/N26)
+     LUT4:I1->O            2   0.612   0.532  d1/rs1_or000023 (d1/rs1_or000023)
+     LUT4:I0->O            9   0.612   0.849  d1/rs1_or000040 (d1/rs1_or0000)
+     LUT3:I0->O            1   0.612   0.360  d1/opcode<0>67 (d1/opcode<0>67)
+     LUT4:I3->O            1   0.612   0.387  d1/opcode<0>108_SW0 (N1016)
+     LUT4:I2->O           48   0.612   1.080  d1/opcode<0>108 (opcode<0>)
+     LUT4:I3->O            1   0.612   0.387  alu_rv2_or0000_SW1 (N375)
+     LUT4:I2->O          145   0.612   1.255  alu_rv2_or0000 (alu_rv2_or0000)
+     LUT3:I0->O            5   0.612   0.690  alu_rv2<20>1 (alu_rv2<20>)
+     LUT4:I0->O            1   0.612   0.000  a1/out_or0000_wg_lut<1> (a1/out_or0000_wg_lut<1>)
+     MUXCY:S->O            1   0.404   0.000  a1/out_or0000_wg_cy<1> (a1/out_or0000_wg_cy<1>)
+     MUXCY:CI->O           1   0.052   0.000  a1/out_or0000_wg_cy<2> (a1/out_or0000_wg_cy<2>)
+     MUXCY:CI->O           1   0.052   0.000  a1/out_or0000_wg_cy<3> (a1/out_or0000_wg_cy<3>)
+     MUXCY:CI->O           1   0.052   0.000  a1/out_or0000_wg_cy<4> (a1/out_or0000_wg_cy<4>)
+     MUXCY:CI->O           1   0.052   0.000  a1/out_or0000_wg_cy<5> (a1/out_or0000_wg_cy<5>)
+     MUXCY:CI->O          30   0.399   1.224  a1/out_or0000_wg_cy<6> (a1/out_or0000)
+     LUT3_D:I0->O          8   0.612   0.673  a1/out_shift0002<31>1 (a1/out_shift0002<31>)
+     LUT3_D:I2->O         15   0.612   0.867  a1/out<0>21_1 (a1/out<0>21)
+     LUT4_L:I3->LO         1   0.612   0.103  a1/out<19>140_SW0 (N470)
+     LUT4:I3->O            3   0.612   0.454  a1/out<19>176 (daddr_19_OBUF)
+     LUT4:I3->O            1   0.612   0.000  iaddr_cmp_eq0000_wg_lut<3> (iaddr_cmp_eq0000_wg_lut<3>)
+     MUXCY:S->O            1   0.404   0.000  iaddr_cmp_eq0000_wg_cy<3> (iaddr_cmp_eq0000_wg_cy<3>)
+     MUXCY:CI->O           1   0.051   0.000  iaddr_cmp_eq0000_wg_cy<4> (iaddr_cmp_eq0000_wg_cy<4>)
+     MUXCY:CI->O           1   0.051   0.000  iaddr_cmp_eq0000_wg_cy<5> (iaddr_cmp_eq0000_wg_cy<5>)
+     MUXCY:CI->O           3   0.400   0.481  iaddr_cmp_eq0000_wg_cy<6> (iaddr_cmp_eq00001)
+     LUT4_D:I2->O         15   0.612   0.867  iaddr_mux0000<0>1 (N22)
+     LUT4:I3->O            1   0.612   0.357  iaddr_mux0000<22>_SW0 (N341)
+     FDRS:S                    0.795          iaddr_22
+    ----------------------------------------
+    Total                     29.450ns (15.723ns logic, 13.727ns route)
+                                       (53.4% logic, 46.6% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'rf_win_not00011'
+  Total number of paths / destination ports: 423078695 / 32
+-------------------------------------------------------------------------
+Offset:              29.549ns (Levels of Logic = 29)
+  Source:            idata<0> (PAD)
+  Destination:       rf_win_23 (LATCH)
+  Destination Clock: rf_win_not00011 falling
+
+  Data Path: idata<0> to rf_win_23
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IBUF:I->O            10   1.106   0.902  idata_0_IBUF (idata_0_IBUF)
+     LUT4:I0->O            1   0.612   0.000  d1/rd_cmp_eq001111 (d1/rd_cmp_eq00111)
+     MUXF5:I0->O          13   0.278   0.866  d1/rd_cmp_eq00111_f5 (d1/N21)
+     LUT3:I2->O            6   0.612   0.721  d1/rs1_cmp_eq00021 (d1/rs1_cmp_eq0002)
+     LUT3:I0->O            7   0.612   0.671  d1/rs1_and000211 (d1/N26)
+     LUT4:I1->O            2   0.612   0.532  d1/rs1_or000023 (d1/rs1_or000023)
+     LUT4:I0->O            9   0.612   0.849  d1/rs1_or000040 (d1/rs1_or0000)
+     LUT3:I0->O            1   0.612   0.360  d1/opcode<0>67 (d1/opcode<0>67)
+     LUT4:I3->O            1   0.612   0.387  d1/opcode<0>108_SW0 (N1016)
+     LUT4:I2->O           48   0.612   1.080  d1/opcode<0>108 (opcode<0>)
+     LUT4:I3->O            1   0.612   0.387  alu_rv2_or0000_SW1 (N375)
+     LUT4:I2->O          145   0.612   1.255  alu_rv2_or0000 (alu_rv2_or0000)
+     LUT3:I0->O            5   0.612   0.690  alu_rv2<20>1 (alu_rv2<20>)
+     LUT4:I0->O            1   0.612   0.000  a1/out_or0000_wg_lut<1> (a1/out_or0000_wg_lut<1>)
+     MUXCY:S->O            1   0.404   0.000  a1/out_or0000_wg_cy<1> (a1/out_or0000_wg_cy<1>)
+     MUXCY:CI->O           1   0.052   0.000  a1/out_or0000_wg_cy<2> (a1/out_or0000_wg_cy<2>)
+     MUXCY:CI->O           1   0.052   0.000  a1/out_or0000_wg_cy<3> (a1/out_or0000_wg_cy<3>)
+     MUXCY:CI->O           1   0.052   0.000  a1/out_or0000_wg_cy<4> (a1/out_or0000_wg_cy<4>)
+     MUXCY:CI->O           1   0.052   0.000  a1/out_or0000_wg_cy<5> (a1/out_or0000_wg_cy<5>)
+     MUXCY:CI->O          30   0.399   1.224  a1/out_or0000_wg_cy<6> (a1/out_or0000)
+     LUT3_D:I0->O          8   0.612   0.673  a1/out_shift0002<31>1 (a1/out_shift0002<31>)
+     LUT3_D:I2->O         15   0.612   0.894  a1/out<0>21_1 (a1/out<0>21)
+     LUT4:I2->O            2   0.612   0.383  a1/out<0>220 (a1/out<0>220)
+     LUT4:I3->O           19   0.612   0.952  a1/out<0>422 (daddr_0_OBUF)
+     LUT4:I2->O            1   0.612   0.000  N012 (N012)
+     MUXF5:I0->O           4   0.278   0.651  N01_f5 (N01)
+     LUT3:I0->O            2   0.612   0.532  rf_win_mux0000<23>111 (N20)
+     LUT4:I0->O            1   0.612   0.360  rf_win_mux0000<31>27_SW1 (N980)
+     LUT4:I3->O            1   0.612   0.000  rf_win_mux0000<31>27 (rf_win_mux0000<31>)
+     LD:D                      0.268          rf_win_31
+    ----------------------------------------
+    Total                     29.549ns (15.179ns logic, 14.369ns route)
+                                       (51.4% logic, 48.6% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'clk'
+  Total number of paths / destination ports: 21080 / 128
+-------------------------------------------------------------------------
+Offset:              15.898ns (Levels of Logic = 14)
+  Source:            rf1/Mram_rfmem_ren41 (RAM)
+  Destination:       daddr<0> (PAD)
+  Source Clock:      clk rising
+
+  Data Path: rf1/Mram_rfmem_ren41 to daddr<0>
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     RAM16X1D:WCLK->DPO    1   1.654   0.426  rf1/Mram_rfmem_ren41 (N85)
+     LUT3:I1->O            5   0.612   0.568  inst_LPM_MUX2011 (dwdata_20_OBUF)
+     LUT3:I2->O            5   0.612   0.690  alu_rv2<20>1 (alu_rv2<20>)
+     LUT4:I0->O            1   0.612   0.000  a1/out_or0000_wg_lut<1> (a1/out_or0000_wg_lut<1>)
+     MUXCY:S->O            1   0.404   0.000  a1/out_or0000_wg_cy<1> (a1/out_or0000_wg_cy<1>)
+     MUXCY:CI->O           1   0.052   0.000  a1/out_or0000_wg_cy<2> (a1/out_or0000_wg_cy<2>)
+     MUXCY:CI->O           1   0.052   0.000  a1/out_or0000_wg_cy<3> (a1/out_or0000_wg_cy<3>)
+     MUXCY:CI->O           1   0.052   0.000  a1/out_or0000_wg_cy<4> (a1/out_or0000_wg_cy<4>)
+     MUXCY:CI->O           1   0.052   0.000  a1/out_or0000_wg_cy<5> (a1/out_or0000_wg_cy<5>)
+     MUXCY:CI->O          30   0.399   1.224  a1/out_or0000_wg_cy<6> (a1/out_or0000)
+     LUT3_D:I0->O          8   0.612   0.673  a1/out_shift0002<31>1 (a1/out_shift0002<31>)
+     LUT3_D:I2->O         15   0.612   0.894  a1/out<0>21_1 (a1/out<0>21)
+     LUT4:I2->O            2   0.612   0.383  a1/out<0>220 (a1/out<0>220)
+     LUT4:I3->O           19   0.612   0.922  a1/out<0>422 (daddr_0_OBUF)
+     OBUF:I->O                 3.169          daddr_0_OBUF (daddr<0>)
+    ----------------------------------------
+    Total                     15.898ns (10.117ns logic, 5.782ns route)
+                                       (63.6% logic, 36.4% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'we_not0001'
+  Total number of paths / destination ports: 4 / 4
+-------------------------------------------------------------------------
+Offset:              4.114ns (Levels of Logic = 1)
+  Source:            we_3 (LATCH)
+  Destination:       we<3> (PAD)
+  Source Clock:      we_not0001 falling
+
+  Data Path: we_3 to we<3>
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     LD:G->Q               1   0.588   0.357  we_3 (we_3)
+     OBUF:I->O                 3.169          we_3_OBUF (we<3>)
+    ----------------------------------------
+    Total                      4.114ns (3.757ns logic, 0.357ns route)
+                                       (91.3% logic, 8.7% route)
+
+=========================================================================
+Timing constraint: Default path analysis
+  Total number of paths / destination ports: 33956937 / 64
+-------------------------------------------------------------------------
+Delay:               28.151ns (Levels of Logic = 25)
+  Source:            idata<0> (PAD)
+  Destination:       daddr<0> (PAD)
+
+  Data Path: idata<0> to daddr<0>
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IBUF:I->O            10   1.106   0.902  idata_0_IBUF (idata_0_IBUF)
+     LUT4:I0->O            1   0.612   0.000  d1/rd_cmp_eq001111 (d1/rd_cmp_eq00111)
+     MUXF5:I0->O          13   0.278   0.866  d1/rd_cmp_eq00111_f5 (d1/N21)
+     LUT3:I2->O            6   0.612   0.721  d1/rs1_cmp_eq00021 (d1/rs1_cmp_eq0002)
+     LUT3:I0->O            7   0.612   0.671  d1/rs1_and000211 (d1/N26)
+     LUT4:I1->O            2   0.612   0.532  d1/rs1_or000023 (d1/rs1_or000023)
+     LUT4:I0->O            9   0.612   0.849  d1/rs1_or000040 (d1/rs1_or0000)
+     LUT3:I0->O            1   0.612   0.360  d1/opcode<0>67 (d1/opcode<0>67)
+     LUT4:I3->O            1   0.612   0.387  d1/opcode<0>108_SW0 (N1016)
+     LUT4:I2->O           48   0.612   1.080  d1/opcode<0>108 (opcode<0>)
+     LUT4:I3->O            1   0.612   0.387  alu_rv2_or0000_SW1 (N375)
+     LUT4:I2->O          145   0.612   1.255  alu_rv2_or0000 (alu_rv2_or0000)
+     LUT3:I0->O            5   0.612   0.690  alu_rv2<20>1 (alu_rv2<20>)
+     LUT4:I0->O            1   0.612   0.000  a1/out_or0000_wg_lut<1> (a1/out_or0000_wg_lut<1>)
+     MUXCY:S->O            1   0.404   0.000  a1/out_or0000_wg_cy<1> (a1/out_or0000_wg_cy<1>)
+     MUXCY:CI->O           1   0.052   0.000  a1/out_or0000_wg_cy<2> (a1/out_or0000_wg_cy<2>)
+     MUXCY:CI->O           1   0.052   0.000  a1/out_or0000_wg_cy<3> (a1/out_or0000_wg_cy<3>)
+     MUXCY:CI->O           1   0.052   0.000  a1/out_or0000_wg_cy<4> (a1/out_or0000_wg_cy<4>)
+     MUXCY:CI->O           1   0.052   0.000  a1/out_or0000_wg_cy<5> (a1/out_or0000_wg_cy<5>)
+     MUXCY:CI->O          30   0.399   1.224  a1/out_or0000_wg_cy<6> (a1/out_or0000)
+     LUT3_D:I0->O          8   0.612   0.673  a1/out_shift0002<31>1 (a1/out_shift0002<31>)
+     LUT3_D:I2->O         15   0.612   0.894  a1/out<0>21_1 (a1/out<0>21)
+     LUT4:I2->O            2   0.612   0.383  a1/out<0>220 (a1/out<0>220)
+     LUT4:I3->O           19   0.612   0.922  a1/out<0>422 (daddr_0_OBUF)
+     OBUF:I->O                 3.169          daddr_0_OBUF (daddr<0>)
+    ----------------------------------------
+    Total                     28.151ns (15.355ns logic, 12.797ns route)
+                                       (54.5% logic, 45.5% route)
+
+=========================================================================
+
+
+Total REAL time to Xst completion: 65.00 secs
+Total CPU time to Xst completion: 28.02 secs
+ 
+--> 
+
+
+Total memory usage is 551160 kilobytes
+
+Number of errors   :    0 (   0 filtered)
+Number of warnings :    5 (   0 filtered)
+Number of infos    :    6 (   0 filtered)
+

@@ -1,0 +1,4 @@
+verilog work "rf_file.v"
+verilog work "decoder.v"
+verilog work "ALU.v"
+verilog work "CPU.v"
